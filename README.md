@@ -1,2 +1,2 @@
 # odin-calculator
-odin-calculator
+calculator with javascript
