@@ -6,6 +6,7 @@ let currentExpression = '';
 const numberButtons = document.querySelectorAll('.number-button');
 const operatorButtons = document.querySelectorAll('.operator-button');
 const equalsButton = document.querySelector('.equals-button');
+const decimalButton = document.querySelector('.decimal-button');
 const display = document.querySelector('.display');
 const clearButton = document.querySelector('.clear-button');
 const deleteButton = document.querySelector('.delete-button');
@@ -31,6 +32,20 @@ function updateOperand(e){
     operand2 += newNumber;
   }
   updateDisplay();
+}
+
+decimalButton.addEventListener('click', addDecimal);
+
+function addDecimal(e){
+  if(currentExpression.includes('.')) return;
+  const lastChar = currentExpression.slice(-1);
+  const operators = ['/', '*', '-', '+'];
+  if(operators.includes(lastChar)){
+    operand2 = '0.'
+    updateDisplay();
+  } else{
+    updateOperand(e);
+  }
 }
 
 function updateDisplay(){
