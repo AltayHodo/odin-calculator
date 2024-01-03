@@ -72,13 +72,11 @@ button{
   background-color: rgb(170, 170, 255);
 }
 
-.number-button:hover, 
-.operator-button:hover{
+.grey-button:hover{
   background-color: rgb(223,223,223);
 }
 
-.number-button:active, 
-.operator-button:active{
+.grey-button:active{
   background-color: rgb(208,208,208);
 }
 

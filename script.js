@@ -11,24 +11,46 @@ const display = document.querySelector('.display');
 const clearButton = document.querySelector('.clear-button');
 const deleteButton = document.querySelector('.delete-button');
 
-operatorButtons.forEach(operatorButton => {
-  operatorButton.addEventListener('click', updateOperator);
+document.addEventListener('keydown', (e) => {
+  if(e.key >= 0 && e.key <= 9){
+    updateOperand(e.key);
+  }
+  const operators = ['/', '*', '-', '+'];
+  if(operators.includes(e.key)){
+    updateOperator(e.key);
+  }
+  if(e.key === '=' || e.key === 'Enter'){
+    evaluate();
+  }
+  if(e.key === '.'){
+    addDecimal();
+  }
+  if(e.key === 'Backspace'){
+    deleteValue();
+  }
 });
 
-function updateOperator(e){
+operatorButtons.forEach(operatorButton => {
+  operatorButton.addEventListener('click', (e) => {
+    updateOperator(e.target.textContent);
+  });
+});
+
+function updateOperator(newOperator){
   if(operator && operand2){
     evaluate();
   }
-  operator = e.target.textContent;
+  operator = newOperator;
   updateDisplay();
 }
 
 numberButtons.forEach(numberButton => {
-  numberButton.addEventListener('click', updateOperand);
+  numberButton.addEventListener('click', (e) =>{
+    updateOperand(e.target.textContent);
+  });
 });
 
-function updateOperand(e){
-  const newNumber = e.target.textContent;
+function updateOperand(newNumber){
   if(!operator){
     operand1 += newNumber;
   }else{
@@ -40,14 +62,14 @@ function updateOperand(e){
 decimalButton.addEventListener('click', addDecimal);
 
 function addDecimal(e){
-  if(currentExpression.includes('.')) return;
+  if(currentExpression.includes('.') || !operand1) return;
   const lastChar = currentExpression.slice(-1);
   const operators = ['/', '*', '-', '+'];
   if(operators.includes(lastChar)){
     operand2 = '0.'
     updateDisplay();
   } else{
-    updateOperand(e);
+    updateOperand('.');
   }
 }
 
