@@ -16,6 +16,9 @@ operatorButtons.forEach(operatorButton => {
 });
 
 function updateOperator(e){
+  if(operator && operand2){
+    evaluate();
+  }
   operator = e.target.textContent;
   updateDisplay();
 }
