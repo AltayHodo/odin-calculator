@@ -47,7 +47,7 @@ function evaluate(){
     clearValues();
     return;
   }
-  const newValue = operate(Number(operand1), Number(operand2), operator)
+  const newValue = roundTo3Decimals(operate(Number(operand1), Number(operand2), operator));
   operator = '';
   operand1 = newValue;
   operand2 = '';
@@ -100,3 +100,6 @@ function multiply(a,b){
   return a * b;
 }
 
+function roundTo3Decimals(num){
+  return Number(num.toFixed(3));
+}
