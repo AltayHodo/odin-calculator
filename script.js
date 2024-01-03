@@ -11,25 +11,6 @@ const display = document.querySelector('.display');
 const clearButton = document.querySelector('.clear-button');
 const deleteButton = document.querySelector('.delete-button');
 
-document.addEventListener('keydown', (e) => {
-  if(e.key >= 0 && e.key <= 9){
-    updateOperand(e.key);
-  }
-  const operators = ['/', '*', '-', '+'];
-  if(operators.includes(e.key)){
-    updateOperator(e.key);
-  }
-  if(e.key === '=' || e.key === 'Enter'){
-    evaluate();
-  }
-  if(e.key === '.'){
-    addDecimal();
-  }
-  if(e.key === 'Backspace'){
-    deleteValue();
-  }
-});
-
 operatorButtons.forEach(operatorButton => {
   operatorButton.addEventListener('click', (e) => {
     updateOperator(e.target.textContent);
@@ -106,7 +87,6 @@ function clearValues(){
 deleteButton.addEventListener('click', deleteValue);
 
 function deleteValue(){
-  console.log(currentExpression);
   if(!operand1) return;
   if(operand1 && !operator){
     operand1 = operand1.slice(0,-1);
@@ -154,3 +134,22 @@ function multiply(a,b){
 function roundTo3Decimals(num){
   return Number(num.toFixed(3));
 }
+
+document.addEventListener('keydown', (e) => {
+  if(e.key >= 0 && e.key <= 9){
+    updateOperand(e.key);
+  }
+  const operators = ['/', '*', '-', '+'];
+  if(operators.includes(e.key)){
+    updateOperator(e.key);
+  }
+  if(e.key === '=' || e.key === 'Enter'){
+    evaluate();
+  }
+  if(e.key === '.'){
+    addDecimal();
+  }
+  if(e.key === 'Backspace'){
+    deleteValue();
+  }
+});
