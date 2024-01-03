@@ -7,7 +7,7 @@ const numberButtons = document.querySelectorAll('.number-button');
 const operatorButtons = document.querySelectorAll('.operator-button');
 const equalsButton = document.querySelector('.equals-button');
 const display = document.querySelector('.display');
-
+const clearButton = document.querySelector('.clear-button');
 
 operatorButtons.forEach(operatorButton => {
   operatorButton.addEventListener('click', updateOperator);
@@ -41,15 +41,35 @@ equalsButton.addEventListener('click', evaluate)
 
 function evaluate(){
   if(!operand1 || !operand2) return;
+  console.log(operand1, operand2, operator)
+  if(operator === '/' && operand2 === '0'){
+    alert('You can\'t divide by 0!');
+    clearValues();
+    return;
+  }
   const newValue = operate(Number(operand1), Number(operand2), operator)
   operator = '';
   operand1 = newValue;
   operand2 = '';
   display.textContent = newValue;
-  console.log(newValue);
+}
+
+clearButton.addEventListener('click', clearValues);
+
+function clearValues(){
+  operator = '';
+  operand1 = '';
+  operand2 = '';
+  updateDisplay();
 }
 
 function operate(operand1, operand2, operator){
+  // console.log(operand1, operand2, operator)
+  // if(operator === '/' && operand2 === 0){
+  //   alert('You can\'t divide by 0!');
+  //   clearValues();
+  //   return;
+  // }
   if(operator === '+'){
     return add(operand1, operand2);
   }
