@@ -1,10 +1,12 @@
 let operand1 = ''
 let operand2 = ''
 let operator = '';
+let currentExpression = '';
 
 const numberButtons = document.querySelectorAll('.number-button');
 const operatorButtons = document.querySelectorAll('.operator-button');
 const equalsButton = document.querySelector('.equals-button');
+const display = document.querySelector('.display');
 
 
 operatorButtons.forEach(operatorButton => {
@@ -13,6 +15,7 @@ operatorButtons.forEach(operatorButton => {
 
 function updateOperator(e){
   operator = e.target.textContent;
+  updateDisplay();
 }
 
 numberButtons.forEach(numberButton => {
@@ -26,6 +29,12 @@ function updateOperand(e){
   }else{
     operand2 += newNumber;
   }
+  updateDisplay();
+}
+
+function updateDisplay(){
+  currentExpression = `${operand1} ${operator} ${operand2}`;
+  display.textContent = currentExpression;
 }
 
 equalsButton.addEventListener('click', evaluate)
@@ -36,6 +45,7 @@ function evaluate(){
   operator = '';
   operand1 = newValue;
   operand2 = '';
+  display.textContent = newValue;
   console.log(newValue);
 }
 
